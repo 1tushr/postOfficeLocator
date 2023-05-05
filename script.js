@@ -3,22 +3,48 @@ const getLocation = async () => {
     const response = await fetch("https://ipapi.co/json/");
     const data = await response.json();
     const ip = data.ip;
+    
     console.log(ip);
+    
 
     //showing ip on ui
     const ipAddrElem = document.querySelector("#ip-address");
-    ipAddrElem.innerHTML = `<h2>My Public Ip is : <b>${ip}</b></h2>`;
+    ipAddrElem.innerHTML = `<h2>My Public Ip is : <b>${ip}</b></h2>`
+
+
+
 
     const pincode = data.postal;
     console.log(pincode);
 //pincode
     let displayPincode=document.getElementById('pincode');
     displayPincode.textContent=`Pincode: ${pincode}`;
-
+//latitude & longitude 
     const latLongResponse = await fetch(`https://ipapi.co/${ip}/latlong/`);
     const latLongData = await latLongResponse.text();
     const [latitude, longitude] = latLongData.split(",");
     console.log(latitude, longitude);
+
+    let lat=document.getElementById('lat');
+    lat.textContent=`Lat: ${latitude}`;
+
+    let long=document.getElementById('long');
+    long.textContent=`Lat: ${longitude}`;
+//city
+      let citys=data.city;
+      let city=document.getElementById('city');
+      city.textContent=`City:  ${citys}`;
+
+
+      //region
+
+
+      let regions=data.region;
+      let region=document.getElementById('region');
+      region.textContent=`City:  ${regions}`;
+
+    
+
 
     const timezoneResponse = await fetch(`https://ipapi.co/${ip}/timezone/`);
     const timezone = await timezoneResponse.text();
@@ -38,7 +64,10 @@ const getLocation = async () => {
     let visible = document.getElementById("posts");
     visible.style.display = "block";
 
-    
+    //making info visible
+
+    let information=document.getElementById('info-container');
+    information.style.display="flex";
 
     
 
@@ -47,7 +76,7 @@ const getLocation = async () => {
     console.log(postOfficeDetails);
     console.log(postOfficeDetails.Message)
     let Message=document.getElementById('message');
-    Message.textContent=`Message ${postOfficeDetails.PostOffice.length}`;
+    Message.textContent=`Message: ${postOfficeDetails.Message}`;
     
 
     if (postOfficeDetails.Status === "Success") {

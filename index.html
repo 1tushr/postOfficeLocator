@@ -10,8 +10,24 @@
     <div class="container">
       <div class="card">
         <h2>IP Address Details</h2>
+
         <div id="ip-address"></div>
+        <div id="info-container">
+            <div class="info-content">
+                <div id="lat">Lat:</div>
+                <div id="long">Long:</div>
+            </div>
+
+            <div class="info-content">
+                <div id="city">City:</div>
+                <div id="region">Region:</div>
+            </div>
+
+            
+        </div>
         <button id="btn">Get Details</button>
+
+        
         <div id="map-container">
           <iframe id="map-frame"></iframe>
         </div>
@@ -26,7 +42,7 @@
             <h2 id="pincode"></h2>
             <h2 id="message"></h2>
 
-          <h2>Postal Addresses</h2>
+          <br>
           <input type="text" id="search" placeholder="Enter Pincode..." />
           <button id="searched">Search</button>
           <div id="message"></div>

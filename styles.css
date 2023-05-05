@@ -12,7 +12,16 @@
     margin: 0 auto;
     padding: 20px;
 } */
+#info-container{
+    margin-top: 20px;
+    
+    flex-flow: wrap;
+    justify-content: space-between;
+    display: none;
+    gap:20px;
+    font-size: 1.5rem;
 
+}
 .card {
     background-color: #fff;
     
@@ -53,7 +62,8 @@
 .card button {
     margin-top: 2rem;
     margin-bottom: 2rem;
-    padding: 10px;
+    padding: 1rem;
+    width: 8rem;
     background-color:black;
     color: #fff;
     border: none;
