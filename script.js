@@ -27,6 +27,11 @@ const getLocation = async () => {
     let time = new Date().toLocaleString("en-US", { timeZone: timezone });
     console.log(time);
 
+    let visible = document.getElementById('posts');
+visible.style.display = 'block';
+
+
+
     // fetching postal details
     const postOfficeDetails = await getPostalDetails(pincode);
     console.log(postOfficeDetails);
@@ -93,6 +98,7 @@ const showPostOffice = (postOfficeArr) => {
   postOfficeList.classList.add("post-offices"); // Add the "post-offices" class to the ul element
 };
 
+//making button visible
 
 
 search.addEventListener('input', () => {
