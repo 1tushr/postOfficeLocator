@@ -1,6 +1,3 @@
-
-
-
 const getLocation = async () => {
   try {
     const response = await fetch("https://ipapi.co/json/");
@@ -9,11 +6,14 @@ const getLocation = async () => {
     console.log(ip);
 
     //showing ip on ui
-    const ipAddrElem = document.querySelector('#ip-address');
+    const ipAddrElem = document.querySelector("#ip-address");
     ipAddrElem.innerHTML = `<h2>My Public Ip is : <b>${ip}</b></h2>`;
 
     const pincode = data.postal;
     console.log(pincode);
+//pincode
+    let displayPincode=document.getElementById('pincode');
+    displayPincode.textContent=`Pincode: ${pincode}`;
 
     const latLongResponse = await fetch(`https://ipapi.co/${ip}/latlong/`);
     const latLongData = await latLongResponse.text();
@@ -24,26 +24,45 @@ const getLocation = async () => {
     const timezone = await timezoneResponse.text();
     console.log(timezone);
 
+//timezone
+    let displayTime=document.getElementById('timezone');
+    displayTime.textContent=`Time Zone: ${timezone}`;
+
+
     let time = new Date().toLocaleString("en-US", { timeZone: timezone });
     console.log(time);
+    let Time=document.getElementById('date');
+    Time.textContent=`Date And Time: ${time}`;
+    
+    //making postal elements visible
+    let visible = document.getElementById("posts");
+    visible.style.display = "block";
 
-    let visible = document.getElementById('posts');
-visible.style.display = 'block';
+    
 
-
+    
 
     // fetching postal details
     const postOfficeDetails = await getPostalDetails(pincode);
     console.log(postOfficeDetails);
+    console.log(postOfficeDetails.Message)
+    let Message=document.getElementById('message');
+    Message.textContent=`Message ${postOfficeDetails.PostOffice.length}`;
+    
 
     if (postOfficeDetails.Status === "Success") {
       const postOfficeList = document.getElementById("post-offices");
       postOfficeList.innerHTML = ""; // Clear the list
 
       showPostOffice(postOfficeDetails.PostOffice);
+      
     } else {
       console.log(postOfficeDetails.Message);
     }
+
+    
+    // const postOfficesElement = document.getElementById("message");
+    // postOfficesElement.innerHTML = `Post offices found: ${postOfficeDetails.length}`;
 
     const mapFrame = document.getElementById("map-frame");
     mapFrame.src = `https://maps.google.com/maps?q=${latitude},${longitude}&z=15&output=embed`;
@@ -100,11 +119,9 @@ const showPostOffice = (postOfficeArr) => {
 
 //making button visible
 
-
-search.addEventListener('input', () => {
+search.addEventListener("input", () => {
   const searchTerm = search.value.trim().toLowerCase();
-  const filteredPostOffices = postOfficeArr.filter((postOffice) =>
-   {
+  const filteredPostOffices = postOfficeArr.filter((postOffice) => {
     return (
       postOffice.Name.toLowerCase().includes(searchTerm) ||
       postOffice.BranchType.toLowerCase().includes(searchTerm)
@@ -113,12 +130,8 @@ search.addEventListener('input', () => {
   showPostOffice(filteredPostOffices);
 });
 
-
-
 let btn = document.getElementById("btn");
 btn.addEventListener("click", getLocation);
-
-
 
 let postOfficeArr = [];
 
@@ -138,5 +151,3 @@ const fetchPostOffices = async () => {
 };
 
 fetchPostOffices();
-
-
