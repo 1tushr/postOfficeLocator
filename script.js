@@ -29,7 +29,7 @@ const getLocation = async () => {
     lat.textContent=`Lat: ${latitude}`;
 
     let long=document.getElementById('long');
-    long.textContent=`Lat: ${longitude}`;
+    long.textContent=`Long: ${longitude}`;
 //city
       let citys=data.city;
       let city=document.getElementById('city');
@@ -41,7 +41,7 @@ const getLocation = async () => {
 
       let regions=data.region;
       let region=document.getElementById('region');
-      region.textContent=`City:  ${regions}`;
+      region.textContent=`Region:  ${regions}`;
 
     
 
